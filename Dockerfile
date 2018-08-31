@@ -1,21 +1,34 @@
-FROM centos:7
+# Pull base image
+FROM openjdk:8-jdk-slim
 
 MAINTAINER Ivan Subotic "ivan.subotic@unibas.ch"
 
-# IMPORT the Centos-7 GPG key to prevent warnings
-RUN rpm --import http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-7
+# Env variables
+ENV SBT_VERSION 1.2.1
 
-# Add bintray repository where the SBT binaries are published
-RUN curl -sS https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo
+# Install curl
+RUN \
+  apt-get update && \
+  apt-get -y install wget
 
-# Base Install + JDK
-RUN yum -y update && \
-    yum -y install java-1.8.0-openjdk && \
-    yum -y install java-1.8.0-openjdk-devel && \
-    yum -y install sbt && \
-    yum -y update bash && \
-    rm -rf /var/cache/yum/* && \
-    yum clean all
+# Install sbt
+RUN \
+  wget https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb && \
+  dpkg -i sbt-$SBT_VERSION.deb && \
+  rm sbt-$SBT_VERSION.deb && \
+  apt-get update && \
+  apt-get install sbt
 
-# Run SBT once so that all libraries are downloaded
-RUN sbt exit
+# Install YourKit profiler agent
+RUN wget https://www.yourkit.com/download/docker/YourKit-JavaProfiler-2018.04-docker.zip -P /tmp/ && \
+    unzip /tmp/YourKit-JavaProfiler-2018.04-docker.zip -d /usr/local && \
+    rm /tmp/YourKit-JavaProfiler-2018.04-docker.zip
+
+EXPOSE 3333
+EXPOSE 10001
+
+# Make source directory
+RUN mkdir /src
+
+# Define working directory
+WORKDIR /src
