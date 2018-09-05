@@ -1,5 +1,5 @@
 # Pull base image
-FROM openjdk:8-jdk-slim
+FROM openjdk:10-jdk-slim
 
 MAINTAINER Ivan Subotic "ivan.subotic@unibas.ch"
 
