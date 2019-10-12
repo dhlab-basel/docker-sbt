@@ -1,5 +1,5 @@
 # Pull base image
-FROM openjdk:10-jdk-slim
+FROM openjdk:13-jdk-slim
 
 MAINTAINER Ivan Subotic "400790+subotic@users.noreply.github.com"
 
