@@ -1,5 +1,5 @@
 # Pull base image
-FROM adoptopenjdk/openjdk11:alpine-jdk
+FROM adoptopenjdk/openjdk11:alpine
 
 MAINTAINER Ivan Subotic "400790+subotic@users.noreply.github.com"
 
@@ -12,7 +12,7 @@ ENV PATH /sbt/bin:$PATH
 RUN \
   apk update && \
   apk upgrade && \
-  apk add wget npm bash
+  apk add wget nodejs npm bash
 
 # Install Scala
 ## Piping wget directly into tar
