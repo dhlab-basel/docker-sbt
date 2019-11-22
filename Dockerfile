@@ -1,5 +1,5 @@
 # Pull base image
-FROM openjdk:10-jdk-slim
+FROM adoptopenjdk/openjdk11:alpine-jre
 
 MAINTAINER Ivan Subotic "400790+subotic@users.noreply.github.com"
 
@@ -10,8 +10,9 @@ ENV PATH /sbt/bin:$PATH
 
 # Install curl
 RUN \
-  apt-get update && \
-  apt-get -y install wget
+  apk update && \
+  apk upgrade && \
+  apk add wget npm bash
 
 # Install Scala
 ## Piping wget directly into tar
