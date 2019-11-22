@@ -1,5 +1,5 @@
 # Pull base image
-FROM adoptopenjdk/openjdk11:alpine-jre
+FROM adoptopenjdk/openjdk11:alpine-jdk
 
 MAINTAINER Ivan Subotic "400790+subotic@users.noreply.github.com"
 
