@@ -4,7 +4,7 @@ FROM adoptopenjdk/openjdk11:alpine
 MAINTAINER Ivan Subotic "400790+subotic@users.noreply.github.com"
 
 ENV SCALA_VERSION 2.12.8
-ENV SBT_VERSION 1.2.8
+ENV SBT_VERSION 1.3.10
 
 ENV PATH /sbt/bin:$PATH
 
